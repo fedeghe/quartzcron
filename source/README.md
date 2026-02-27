@@ -1,5 +1,5 @@
 
-[![Coverage Status](https://coveralls.io/repos/github/fedeghe/quartzcron/badge.svg?branch=master)](https://coveralls.io/github/fedeghe/quartzcron?branch=master) ![NPM License](https://img.shields.io/npm/l/quartzcron?style=plastic&color=blue) [![CircleCI](https://dl.circleci.com/status-badge/img/circleci/XxqmUuW3z2J9FC2yrGaqm6/Gqxo9Gfjfd8ERTJvcgnYw9/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/circleci/XxqmUuW3z2J9FC2yrGaqm6/Gqxo9Gfjfd8ERTJvcgnYw9/tree/master)
+[![codecov](https://codecov.io/gh/fedeghe/quartzcron/graph/badge.svg?token=YYB8QXFXNF)](https://codecov.io/gh/fedeghe/quartzcron) ![NPM License](https://img.shields.io/npm/l/quartzcron?style=plastic&color=blue) [![CircleCI](https://dl.circleci.com/status-badge/img/circleci/XxqmUuW3z2J9FC2yrGaqm6/Gqxo9Gfjfd8ERTJvcgnYw9/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/circleci/XxqmUuW3z2J9FC2yrGaqm6/Gqxo9Gfjfd8ERTJvcgnYw9/tree/master)
 
 ![GitHub top language](https://img.shields.io/github/languages/top/fedeghe/quartzcron?labelColor=%23fede76) ![Static Badge](https://img.shields.io/badge/Human%20coded-100%25-blue?style=plastic)
 
@@ -21,15 +21,17 @@ That additional freedom reflects into less trivial composition for the cron stri
 
 A `quartz cron expression` is characterized by the following structure: 
 ```
-s  i  h dom m dow y  
-⎜  ⎜  ⎜  ⎜  ⎜  ⎜  ⎜  
-'--+--+--+--+--+--+--> 1st: seconds
-   '--+--+--+--+--+--> 2nd: minutes
-      '--+--+--+--+--> 3rd: hours
-         '--+--+--+--> 4th: days of month ---\
-            '--+--+--> 5th: months           | mutually exclusive
-               '--+--> 6th: days of week  ---/
-                  '--> 7th: years
+
+
+s  i  h dom m dow {y}  
+│  │  │  │  │  │   │  
+┕━━┿━━┿━━┿━━┿━━┿━━━┿━━▶ seconds
+   ┕━━┿━━┿━━┿━━┿━━━┿━━▶ minutes
+      ┕━━┿━━┿━━┿━━━┿━━▶ hours
+         ┕━━┿━━┿━━━┿━━▶ days of month ━━━┓
+            ┕━━┿━━━┿━━▶ months           ┣━▶ mutually exclusive
+               ┕━━━┿━━▶ days of week ━━━━┛
+                   ┕━━▶ years (optional)
 ```
 
 ## sample usage
@@ -408,16 +410,16 @@ all years from `from` year to `to` year; optionally set the cadence passing an `
 This library was primarily designed to achieve a quite simple task: compose the expression through methods; then validation, occurrences, ..  
 The occurrences composition depends 100% on two data:
 1) the current expression
-2) the fererence date  
+2) the reference date  
 
-thus, calculate the occurrences of an already existing expression (for example given back from and endpoint) one could
+thus, calculate the occurrences of an already existing expression (for example given back from and endpoint) one could unwisely 
 override manually one or more elements in the expression `s,i,h,dom,m,dow,y`
 
  ``` js 
  inst.elements.s = 1
  ```
 
-OR use 
+OR use better
 
 - `updateExp(exp)`  
 updates the current instance expression, handles   

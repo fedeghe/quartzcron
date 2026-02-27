@@ -28,12 +28,10 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.27.0",
-    "coveralls": "^3.1.1",
     "eslint": "^9.27.0",
     "malta": "^4.1.41",
     "malta-header-comment": "^1.0.12",
     "malta-jest": "^0.0.1",
     "malta-millijs": "^1.0.5"
-  },
-  "dependencies": {}
+  }
 }
