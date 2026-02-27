@@ -1,5 +1,5 @@
 /*
-quartzcron (v.0.1.0)
+quartzcron (v.0.1.1)
 */
 const { rx, errors } = require('./constants.js');
 const getRangeValidator = (mainRx, cadenceRx) => val => {
