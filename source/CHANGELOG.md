@@ -1,3 +1,6 @@
+## 0.1.2
+just tracking views on readme
+
 ## 0.1.0  
 just first minor release; corresponds to 0.0.47
 
